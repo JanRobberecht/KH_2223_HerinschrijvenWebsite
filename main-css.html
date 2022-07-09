@@ -1,0 +1,307 @@
+<style>
+
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+html {
+    height: 100%;
+    width: 100%;
+    scroll-behavior: smooth; 
+
+   
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: medium;
+    
+
+    
+    
+}
+
+
+/****************************************/
+/***** NOT VISIBLE FOR FIRST SCREEN *****/
+/****************************************/
+
+
+#before, #after, .comment, #container2 > div, #button-change-container1, #end-container1 p {
+
+    display: none;
+
+}
+
+/****************************************/
+/***** GENERAL MAKE UP *****/
+/****************************************/
+
+#logo-container {
+    margin-bottom: 25px;
+    padding: 10px 0px 0px 10px;
+  }
+
+#logo {
+width: 50vw;
+display: block; /* remove extra space below image */
+max-width: 300px;
+}
+
+.comment {
+    color: red;
+    margin-left: 11px;
+}
+
+#intro h1 {
+   font-size: x-large;
+   color:  rgb(206, 15, 105);
+}
+
+#intro {
+   
+    margin-bottom: 40px;
+}
+
+#intro p {
+    /*color:  rgb(206, 15, 105);*/
+    font-size: medium;
+    margin-top: 20px;
+}
+
+
+
+.question {
+    top: 5px;
+    position: relative;
+    background-color: white;
+    z-index: 999;  /*on top of label*/
+    margin-left: 10px;
+    padding: 0 3px 0 3px;
+    font-size: small;
+    color: rgb(19, 130, 117);
+    font-weight: bold;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 35px white inset;
+}
+
+/*input[type=text]:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 35px white inset;
+}*/
+
+input[type=text], input[type=mail], select {
+    width: 100%;
+    height: 35px;
+    border: solid 1px black;
+    border-radius: 10px;
+    padding: 3px 3px 3px 10px;
+    font-size: medium;
+    background-color: white;
+    z-index: 1; /*under label*/
+    -webkit-appearance: none; /*for safari*/
+}
+
+input[type=text]:disabled, input[type=mail]:disabled, select:disabled {
+    outline: none !important;
+    width: 100%;
+    height: 35px;
+    border: solid 1px rgb(163, 158, 158);
+    border-radius: 10px;
+    padding: 3px 3px 3px 10px;
+    font-size: medium;
+    z-index: 1; /*under label*/
+    -webkit-text-fill-color: rgb(199, 198, 198);
+ 
+  
+
+    /* background-color: red !important;*/
+}
+
+
+
+.box-radio {
+    padding: 10px 3px 4px 10px;
+   
+   
+}
+
+.box-list {
+    padding: 0px 3px 3px 30px;
+}
+
+
+.box-radio > div > label {
+    display: block;
+    margin-left: 30px;
+    margin-bottom: 10px; 
+}
+
+
+
+input[type=radio] {
+    float: left;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+
+.box-radio, .box-list {
+    border: solid 1px black;
+    border-radius: 10px;
+
+   
+}
+
+
+
+/*.box-input {
+    margin-top: 25px;
+}*/
+
+#end-container1, 
+#container1 > div:not(#nextyear-comment-div) {
+    margin-top: 15px;
+}
+
+#container2 > div {
+    margin-top: 20px;
+}
+
+#container2 > #signing > div:not(#text-submitter) {
+    margin-top: 20px;
+}
+
+#text-submitter {
+    margin-top: 5px;
+}
+
+
+
+
+.proef-info p {
+    /* backgroundcolor in javascriptv */
+    color: white;
+    padding: 10px;
+    font-size: small;
+
+}
+
+.proef-info {
+    border: solid 1px #ce0f69;
+    border-radius: 10px;
+    background-color: #ce0f69
+}
+
+.explanation-in-box {
+    margin-top: 3px;
+    font-size: small;
+    color: grey;
+    margin-bottom: 15px;
+}
+
+ul {
+    margin-top: 15px;
+}
+
+ul:last-child {
+    margin-bottom: 15px;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+
+
+/*form {
+    margin-left: 27vw;
+    margin-right: 27vw;
+}*/
+
+button {
+    /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: medium;*/
+    background-color: rgba(19, 130, 117, 0.1);
+    color: rgb(19, 130, 117);
+    padding: 10px 20px 10px 20px;
+    margin-bottom: 20px;
+    border: solid 1px black;
+    border-radius: 10px;
+    /*float: right;*/
+   
+  }
+
+  button:hover {
+    border: 1px solid rgb(19, 130, 117);
+    background-color: rgba(19, 130, 117, 0.3);
+  }
+
+  button:active {
+    border: 1px solid rgb(206, 15, 105);
+    background-color: rgb(206, 15, 105);
+    color: white;
+  }
+
+  button:disabled {
+    color: grey;
+    border: 1px solid grey;
+  }
+
+  #signing p, .end-containers p {
+    font-size: medium;
+}
+
+.end-containers p {
+    padding-bottom: 25px;
+    color: red;
+
+  }
+
+#signing p {
+    margin-top: 30px;
+
+
+}
+ 
+
+  /************************/
+  /***** MEDIAQUERIES *****/
+  /************************/
+
+ 
+  @media only screen and (min-width: 600px) and (max-width: 920px)  {
+
+    form, #intro {
+        margin-left: 15vw;
+        margin-right: 15vw;
+    }
+
+    
+
+  }
+
+
+  @media only screen and (min-width: 921px) {
+
+    form, #intro {
+        margin-left: 27vw;
+        margin-right: 27vw;
+    }
+
+    #logo-container {
+        margin-bottom: 50px;
+    }
+
+  }
+
+  </style>

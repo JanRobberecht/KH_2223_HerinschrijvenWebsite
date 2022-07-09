@@ -1,0 +1,266 @@
+<script>
+
+ /* const results = false; // false is before publishing results, true is after (28/06)
+  const active = true; // true is active, false is stopped (1/07)*/
+
+
+var enrollmentObject = {};
+
+var dateHour = "vrijdag 1 juli 2022 om 12:00 uur";
+
+
+var classesNow = [
+     
+    [1, '1ARVE (Campus ExploArt)', 'X1', '1ARVE', 'CE'],
+    [1, '1ARME (Campus ExploArt)', 'P2', '1ARME', 'CE'],
+    [1, '1ARV (Campus Ieperman)', 'X1', '1ARV', 'CI'],
+    [1, '1ARM (Campus Ieperman)', 'P2', '1ARM', 'CI'],
+    [1, '1DNS (Campus Ieperman)', 'P1', '1DNS', 'CI'],
+    [1, '1LAT (Campus Ieperman)', 'A1', '1LAT', 'CI'],
+    [1, '1MWET (Campus Ieperman)', 'A2', '1MWET', 'CI'],
+    [2, '2ARBE (Campus ExploArt)', 'B1', '2ARBE', 'CE'],
+    [2, '2ARME (Campus ExploArt)', 'P2', '2ARME', 'CE'],
+    [2, '2ARWE (Campus ExploArt)', 'P6', '2ARWE', 'CE'],
+    [2, '2DNS (Campus Ieperman)', 'P1', '2DNS', 'CI'],
+    [2, '2LAT (Campus Ieperman)', 'A1', '2LAT', 'CI'],
+    [2, '2ARB (Campus Ieperman)', 'B1', '2ARB', 'CI'],
+    [2, '2ARM (Campus Ieperman)', 'P2', '2ARM', 'CI'],
+    [2, '2ARW (Campus Ieperman)', 'P6', '2ARW', 'CI'],
+    [2, '2MWET (Campus Ieperman)', 'A2', '2MWET', 'CI'],
+    [3, '3BAK', 'B3', '3BAK'],
+    [3, '3ABV', 'B2', '3ABV'],
+    [3, '3BAVV', 'B5', '3BAVV'],
+    [3, '3DNS', 'P1', '3DNS'],
+    [3, '3FOTO', 'B6', '3FOTO'],
+    [3, '3JPR', 'P3', '3JPR'],
+    [3, '3KM', 'P4', '3KM'],
+    [3, '3MW', 'P5', '3MW'],
+    [3, '3WD', 'P6', '3WD'],
+    [4, '4AO', 'B7', '4AO'],
+    [4, '4AVV', 'B5', '4AVV'],
+    [4, '4BAK', 'B3', '4BAK'],
+    [4, '4BAV', 'B2', '4BAV'],
+    [4, '4DNS', 'P1', '4DNS'],
+    [4, '4JPR', 'P3', '4JPR'],
+    [4, '4KM', 'P4', '4KM'],
+    [4, '4WD', 'P6', '4WD'],
+    [5, '5AV', 'B2', '5AV'],
+    [5, '5AVV', 'B5', '5AVV'],
+    [5, '5BV', 'B2', '5BV'],
+    [5, '5DNS', 'P1', '5DNS'],
+    [5, '5J', 'P3', '5J'],
+    [5, '5KM', 'P4', '5KM'],
+    [5, '5MW', 'P5', '5MW'],
+    [5, '5PR', 'P3', '5PR'],
+    [5, '5TAO', 'B7', '5TAO'],
+    [5, '5TBK', 'B3', '5TBK'],
+    [5, '5VAO', 'B7', '5VAO'],
+    [5, '5VBK', 'B3', '5VBK'],
+    [5, '5WD', 'P6', '5WD'],
+    [6, '6AV', 'B2', '6AV'],
+    [6, '6AVV', 'B5', '6AVV'],
+    [6, '6BV', 'B2', '6BV'],
+    [6, '6DNS', 'P1', '6DNS'],
+    [6, '6J', 'P3', '6J'],
+    [6, '6KM', 'P4', '6KM'],
+    [6, '6MW', 'P5', '6MW'],
+    [6, '6PR', 'P3', '6PR'],
+    [6, '6TAO', 'B7', '6TAO'],
+    [6, '6TBK', 'B3', '6TBK'],
+    [6, '6VAO', 'B7', '6VAO'],
+    [6, '6VBK', 'B3', '6VBK'],
+    [6, '6WD', 'P6', '6WD']
+
+]
+
+
+var classesNext = [
+  
+    [1, '1e jaar Dans(1DNS)', 'P1', '1DNS', 'CI'],
+    [1, '1e jaar Klassieke Talen (1LAT)', 'A1', '1LAT', 'CI'],
+    [1, '1e jaar Kunst en Creatie (1ARVE)', 'X1', '1ARVE', 'CE'],
+    [1, '1e jaar Kunst en Creatie (1ARV)', 'X1', '1ARV', 'CI'],
+    [1, '1e jaar Kunst en Creatie B-stroom (1B)', 'C1', '1B'],
+    [1, '1e jaar Kunst en Creatie Muziek (1ARME)', 'P2', '1ARME', 'CE'],
+    [1, '1e jaar Kunst en Creatie Muziek (1ARM)', 'P2', '1ARM', 'CI' ],
+    [1, '1e jaar Moderne Talen en Wetenschappen (1MWET)', 'A2', '1MWET', 'CI'],
+    [2, '2e jaar Dans (2DNS)', 'P1', '2DNS', 'CI'],
+    [2, '2e jaar Klassieke Talen (2LAT)', 'A1', '2LAT', 'CI'],
+    [2, '2e jaar Kunst en Creatie Beeld (2ARBE)', 'B1','2ARBE', 'CE'],
+    [2, '2e jaar Kunst en Creatie Beeld (2ARB)', 'B1', '2ARB', 'CI'],
+    [2, '2e jaar Kunst en Creatie Muziek (2ARME)', 'P2', '2ARME', 'CE'],
+    [2, '2e jaar Kunst en Creatie Muziek (2ARM)', 'P2', '2ARM', 'CI'],
+    [2, '2e jaar Kunst en Creatie Woord (2ARWE)', 'P6', '2ARWE', 'CE'],
+    [2, '2e jaar Kunst en Creatie Woord (2ARW)', 'P6', '2ARW', 'CI'],
+    [2, '2e jaar Moderne Talen en Wetenschappen (2MWET)', 'A2', '2MWET', 'CI'],
+    [3, '3e jaar Architecturale en Beeldende Vorming (3ABV)', 'B2', '3ABV'],
+    [3, '3e jaar Beeldende en Architecturale Kunsten (3BAK)', 'B3', '3BAK'],
+    [3, '3e jaar Beeldende en Audiovisuele Kunsten (3BAVK)', 'B4', '3BAVK'],
+    [3, '3e jaar Beeldende en Audiovisuele Vorming (3BAVV)', 'B5', '3BAVV'],
+    [3, '3e jaar Dans (3DNS)', 'P1', '3DNS'],
+    [3, '3e jaar Decor en Etalage (3PUB)', 'C1', '3PUB'],
+    [3, '3e jaar Fotografie (3FOTO)', 'B6', '3FOTO'],
+    [3, '3e jaar Jazz-Pop-Rock (3JPR)', 'P3', '3JPR'],
+    [3, '3e jaar Klassieke Muziek (3KM)', 'P4', '3KM'],
+    [3, '3e jaar Muziek-Woord (3MW)', 'P5', '3MW'],
+    [3, '3e jaar Woord-Drama (3WD)', 'P6', '3WD'],
+    [4, '4e jaar Architecturale en Beeldende Vorming (4ABV)', 'B2', '4ABV'],
+    [4, '4e jaar Beeldende en Architecturale Kunsten (4BAK)', 'B3', '4BAK'],
+    [4, '4e jaar Beeldende en Audiovisuele Vorming (4BAVV)', 'B5', '4BAVV'],
+    [4, '4e jaar Dans (4DNS)', 'P1', '4DNS'],
+    [4, '4e jaar Decor en Etalage (4PUB)', 'C1', '4PUB'],
+    [4, '4e jaar Fotografie (4FOTO)', 'B6', '4FOTO'],
+    [4, '4e jaar Jazz-Pop-Rock (4JPR)', 'P3', '4JPR'],
+    [4, '4e jaar Klassieke Muziek (4KM)', 'P4', '4KM'],
+    [4, '4e jaar Muziek-Woord (4MW)', 'P5', '4MW'],
+    [4, '4e jaar Woord-Drama (4WD)', 'P6', '4WD'],
+    [5, '5e jaar Architecturale Vorming (5AV)', 'B2', '5AV'],
+    [5, '5e jaar Audiovisuele Vorming (5AVV)', 'B5', '5AVV'],
+    [5, '5e jaar Beeldende Vorming (5BV)', 'B2', '5BV'],
+    [5, '5e jaar Dans (5DNS)', 'P1', '5DNS'],
+    [5, '5e jaar Jazz (5J)', 'P3', '5J'],
+    [5, '5e jaar Klassieke Muziek (5KM)', 'P4', '5KM'],
+    [5, '5e jaar Muziek-Woord (5MW)', 'P5', '5MW'],
+    [5, '5e jaar Pop-Rock (5PR)', 'P3', '5PR'],
+    [5, '5e jaar Toegepaste Artistieke Opleiding (5TAO)', 'B7', '5TAO'],
+    [5, '5e jaar Toegepaste Beeldende Kunsten (5TBK)', 'B3', '5TBK'],
+    [5, '5e jaar Vrije Artistieke Opleiding (5VAO)', 'B7', '5VAO'],
+    [5, '5e jaar Vrije Beeldende Kunsten (5VBK)', 'B3', '5VBK'],
+    [5, '5e jaar Woord-Drama (5WD)', 'P6', '5WD'],
+    [6, '6e jaar Architecturale Vorming (6AV)', 'B2', '6AV'],
+    [6, '6e jaar Audiovisuele Vorming (6AVV)', 'B5', '6AVV'],
+    [6, '6e jaar Beeldende Vorming (6BV)', 'B2', '6BV'],
+    [6, '6e jaar Dans (6DNS)', 'P1', '6DNS'],
+    [6, '6e jaar Jazz (6J)', 'P3', '6J'],
+    [6, '6e jaar Klassieke Muziek (6KM)', 'P4', '6KM'],
+    [6, '6e jaar Muziek-Woord (6MW)', 'P5', '6MW'],
+    [6, '6e jaar Pop-Rock (6PR)', 'P3', '6PR'],
+    [6, '6e jaar Toegepaste Artistieke Opleiding (6TAO)', 'B7', '6TAO'],
+    [6, '6e jaar Toegepaste Beeldende Kunsten (6TBK)', 'B3', '6TBK'],
+    [6, '6e jaar Vrije Artistieke Opleiding (6VAO)', 'B7', '6VAO'],
+    [6, '6e jaar Vrije Beeldende Kunsten (6VBK)', 'B3', '6VBK'],
+    [6, '6e jaar Woord-Drama (6WD)', 'P6', '6WD'],
+    [7, 'Voorbereidend jaar Beeld (7B)', 'V1', '7B'],
+    [7, 'Voorbereidend jaar Musical (7mus)', 'P7', '7mus'],
+    [7, 'Voorbereidend jaar Muziek - Jazz (7J)', 'P3', '7J'],
+    [7, 'Voorbereidend jaar Muziek - Klassieke Muziek (7KM)', 'P4', '7KM'],
+    [7, 'Voorbereidend jaar Muziek - Pop-Rock-Productie (7PR)', 'P3', '7PR'],
+    [7, 'Voorbereidend jaar Muziek-Woord (7MW)', 'P5', '7MW'],
+    [7, 'Voorbereidend jaar Woord-Drama (7WD)', 'P6', '7WD'],
+    
+]
+
+
+var statementsStop1= [
+
+  "Ik verklaar op eer dat ik de verantwoordelijke van de leerling ben voor wie " +
+  "ik deze uitschrijving heb gedaan"
+]
+
+var statementsStop2 = [
+  
+  "Ik verklaar op eer dat ik meerderjarig ben en mezelf heb uitgeschreven."
+]
+
+var statementsStop3 = [
+  
+  `Ik begrijp dat deze uitschrijving nog tot vrijdag ${dateHour} via ` + 
+  "deze module kan gewijzigd worden in een herinschrijving en dat mijn laatste " +
+  "keuze de definitieve keuze is.",
+
+  `Ik begrijp dat, indien een herinschrijving niet voor ${dateHour} ` + 
+  "uur is ingegeven, de leerling niet meer verzekerd is van het recht om ingeschreven " +
+  "te blijven en zodoende voor bepaalde studierichtingen op een wachtlijst kan terecht komen.",
+
+  "Ik verklaar dat bovenstaande gegevens naar waarheid zijn ingevuld.",
+
+  "Ik ga akkoord dat het verzenden van deze gegevens dezelfde juridische waarde heeft " + 
+  "als mijn handgeschreven handtekening."
+]
+
+var statementsParentStop = statementsStop1.concat(statementsStop3);
+
+var statementsStudentStop = statementsStop2.concat(statementsStop3);
+
+
+var statementsStay1 = [
+  "Ik verklaar op eer dat ik de verantwoordelijke van de leerling ben voor wie " +
+  "ik deze herinschrijving heb gedaan."
+]
+
+var statementsStay2 = [
+  "Ik verklaar op eer dat ik meerderjarig ben en mezelf heb heringeschreven."
+]
+
+var statementsStay3 = [
+  "Ik ga akkoord met het schoolreglement van de!Kunsthumaniora schooljaar 2022-2023 " + 
+  "en het pedagogisch project van het Gemeenschapsonderwijs.",
+
+  `Ik begrijp dat deze herinschrijving nog tot ${dateHour} via ` + 
+  "deze module kan gewijzigd worden en dat mijn laatste " +
+  "keuze de definitieve keuze is.",
+
+  `Ik begrijp dat, indien een herinschrijving niet voor ${dateHour} ` + 
+  "uur is ingegeven, de leerling niet meer verzekerd is van het recht om ingeschreven " +
+  "te blijven en zodoende voor bepaalde studierichtingen op een wachtlijst kan terecht komen.",
+
+  "Ik begrijp dat deze herinschrijving pas geldig is als aan alle toelatingsvoorwaarden voldaan is.",
+
+  "Ik verklaar dat bovenstaande gegevens naar waarheid zijn ingevuld.",
+
+  "Ik ga akkoord dat het verzenden van deze gegevens dezelfde juridische waarde heeft " + 
+  "als mijn handgeschreven handtekening."
+]
+
+
+var statementsParentStay = statementsStay1.concat(statementsStay3);
+
+var statementsStudentStay = statementsStay2.concat(statementsStay3);
+
+var proefInfo = {
+
+  toBK: "Je wil les volgen in een richting binnen de Beeldende Kunsten. Je zal eind juni een proef moeten\
+    afleggen. Meer info vind je op de homepagina van Smartschool > handige links > proeven 2022-2023.",
+  toBK7: "Je wil les volgen in het voorbereidend jaar Beeldende Kunsten. Je zal eind juni een proef moeten\
+    afleggen. Meer info vind je op de homepagina van Smartschool > handige links > proeven 2022-2023.",
+  toPK: "Je wil les volgen in een richting binnen de Podiumkunsten. Je zal eind juni een proef moeten\
+    afleggen. Meer info vind je op de homepagina van Smartschool > handige links > proeven 2022-2023.",
+  inBK: "Je verandert van richting binnen de Beeldende Kunsten.  Contacteer via Smartschool\
+    coördinator Ann Cornelis of het wenselijk is voor jou deel te nemen aan de proef eind juni.  Meer\
+    info vind je op de homepagina van Smartschool > handige links > proeven 2022-2023.",
+  inPK: "Je verandert van richting binnen de Podiumkunsten.  Je zal eind juni een proef moeten afleggen.  Meer\
+    info vind je op de homepagina van Smartschool > handige links > proeven 2022-2023."
+
+}
+
+var imageTaken = {
+
+  parent: "Geef je als verantwoordelijke van de leerling toestemming aan de school om van de leerling\
+    beelden te maken tijdens evenementen of lessen en om deze gemaakte beelden ter promotie van de\
+    school te publiceren op papieren publicaties, de schoolwebsite en sociale media? Duid je keuze aan.",
+  student: "Geef je als meederjarige leerling toestemming aan de school om van de jou beelden te maken\
+    tijdens evenementen of lessen en om deze gemaakte beelden ter promotie van de school te publiceren\
+    op papieren publicaties, de schoolwebsite en sociale media? Duid je keuze aan."
+  
+}
+
+var intro = {
+
+  before: "Wil je volgend jaar opnieuw studeren aan de Kunsthumaniora? Of zal je je studie in een andere school verderzetten?<br><br>Vul daarom onderstaand formulier in voor <b>" + dateHour + "</b>!<br><br><b>Tijdig herinschrijven is verplicht</b>. Zonder jouw herinschrijving voor " + dateHour + " kan de school jouw plaats volgend schooljaar niet geranderen.<br><br>De keuze bij een <b>B-attest (of A-attest met uitsluiting)</b> kan je ingeven vanaf woensdag 29 juni om 17:00 uur.",
+
+  after: "Wil je volgend jaar opnieuw studeren aan de Kunsthumaniora? Of zal je je studie in een andere school verderzetten?<br><br>Vul daarom onderstaand formulier in voor <b>" + dateHour + "</b>!<br><br><b>Tijdig herinschrijven is verplicht</b>. Zonder jouw herinschrijving voor " + dateHour + " kan de school jouw plaats volgend schooljaar niet geranderen.<br><br>De keuze bij een <b>B-attest (of A-attest met uitsluiting)</b> kan je ingeven vanaf woensdag 29 juni om 17:00 uur.",
+
+  stop: "Onze herinschrijvingen zijn afgelopen vanaf " + dateHour + ".<br><br>Contacteer de school voor meer informatie."
+
+}
+
+var validation = {
+  success: "Jouw gegevens zijn opgeslagen in de databank!\n\nWekelijks ontvang je in Smartschool een overzicht van jouw herinschrijving.\n\nWil je jouw keuze wijzigen?  Vul dan opnieuw dit formulier in.  Enkel de laatste ingevoerde gegevens worden bewaard.",
+  failure1: "Sorry, maar er liep iets mis.\n\nProbeer het opnieuw of neem contact op met de school via een smartschool bericht naar \"Herinschrijven\ volgend schooljaar\.",
+  failure1: "Sorry, maar er liep iets mis.\n\nProbeer het opnieuw of contacteer de school via een smartschool bericht naar \"Herinschrijven\ volgend schooljaar\."
+  
+}
+
+
+
+ </script>

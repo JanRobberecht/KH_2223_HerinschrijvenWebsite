@@ -1,0 +1,337 @@
+<html lang="en">
+<head>
+    <base target="_top">
+    <?!= include("main-css");?>
+</head>
+<body>
+
+<div id="logo-container">
+        <img id="logo" src="https://drive.google.com/uc?export=view&id=1Bk9sSf7eYHvvryUWkkRDHrhkhGexu-QQ">
+    </div>
+
+    <div id="intro">
+        <h1>Maak je keuze voor schooljaar 2022-2023!</h1>
+        <p></p>
+    </div>
+
+    <form>
+        <div id="containers">
+            <div id="container1">
+                <div>
+                    <div>
+                        <label class="question" for="fname">Voornaam van de leerling</label>
+                    </div>
+                    <div>
+                        <input type="text" id="fname" name="fname">
+                    </div>
+                    <div>
+                        <label class="comment" id="fname-comment"></label>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label class="question" for="lname">Familienaam van de leerling</label>
+                    </div>
+                    <div>
+                        <input type="text" id="lname" name="lname">
+                    </div>
+                    <div>
+                        <label class="comment" id="lname-comment"></label>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label class="question">Wie vult dit formulier in?</label>
+                    </div>
+                    <div class="box-radio"> 
+                        <div>
+                            <input type="radio" id="parent" name="submitter" value="verantwoordelijke">
+                            <label for="parent">Een verantwoordelijke van de minderjarige leerling</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="student" name="submitter" value="leerling">
+                            <label for="leave">De meerderjarige leerling zelf</label>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="comment" id="submitter-comment"></label>
+                    </div>
+                </div>
+                <div> 
+                    <div>
+                        <label class="question" for="classnow">Huidige klas</label>
+                    </div>
+                    <div>
+                        <select id="classnow" name="classnow">
+                            <option value="" selected></option>
+                        </select> 
+                    </div>
+                    <div>
+                        <label class="comment" id="classnow-comment"></label>
+                    </div>
+                </div>
+                <div id="before">
+                    <div>
+                        <label class="question">Keuze komend schooljaar (2022-2023)</label>
+                    </div>
+                    <div class="box-radio"> 
+                        <div id="before-stay">
+                            <input type="radio" id="stay" name="nextyear" value="blijven">
+                            <label for="stay">De leerling zal met een A attest/diploma en/of C attest <b>les blijven
+                                volgen</b> aan de Kunsthumaniora</label>
+                        </div>
+                        <div id="before-leave">
+                            <input type="radio" id="leave" name="nextyear" value="stoppen">
+                            <label for="leave">De leerling zal ongeacht het attest <b>geen les meer
+                                volgen</b> aan de Kunsthumaniora</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="after">
+                    <div>
+                        <label class="question">Keuze komend schooljaar (2022-2023)</label>
+                    </div>
+                    <div class="box-radio">
+                        <div id="after-a">
+                            <input type="radio" id="a-attest" name="nextyear" value="a-attest">
+                            <label for="a-attest">De leerling heeft een <b>A-attest</b> en blijft les
+                                volgen aan de Kunsthumaniora</label>
+                        </div>
+                        <div id="after-b">
+                            <input type="radio" id="b-attest" name="nextyear" value="b-attest">
+                            <label for="b-attest">De leerling heeft een <b>B-attest</b> en blijft les
+                                volgen aan de Kunsthumaniora</label>
+                        </div>
+                        <div id="after-c">
+                            <input type="radio" id="c-attest" name="nextyear" value="c-attest">
+                            <label for="c-attest">De leerling heeft een <b>C-attest</b> en blijft les
+                                volgen aan de Kunsthumaniora</label>
+                        </div>
+                        <div id="after-leave">
+                            <input type="radio" id="leave" name="nextyear" value="stoppen">
+                            <label for="leave">De leerling zal <b>geen les meer
+                                volgen</b> aan de Kunsthumaniora</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="nextyear-comment-div">
+                    <label class="comment" id="nextyear-comment"></label>
+                </div>
+            </div>
+            <div class="end-containers" id="end-container1">
+                <button id="button-next-container1" type="button">Volgende</button>
+                <p></p>
+            </div>
+            
+
+
+
+
+
+            <div id="container2">
+             
+                <div id="a-attest-container2">
+                    <div>
+                        <div>
+                            <label class="question" for="class-a-attest">Kies de gewenste klas bij een A-attest</label>
+                        </div>
+                        <div>
+                            <select id="class-a-attest" name="class-a-attest">
+                                <option value="" selected></option>
+                            </select> 
+                        </div>
+                        <div>
+                            <label class="comment" id="class-a-attest-comment"></label>
+                        </div>
+                    </div>
+                    <div class="proef-info" id="info-a-attest">
+                        <p></p>
+                    </div>
+                </div>
+
+                <div id="b-attest-container2">
+                    <div>
+                        <div>
+                            <label class="question" for="class-b-attest">Kies de gewenste klas bij een B-attest</label>
+                        </div>
+                        <div>
+                            <select id="class-b-attest" name="class-b-attest">
+                                <option value="" selected></option>
+                            </select> 
+                        </div>
+                        <div>
+                            <label class="comment" id="class-b-attest-comment"></label>
+                        </div>
+                    </div>
+                    <div class="proef-info" id="info-b-attest">
+                        <p> </p>
+                    </div>
+                </div>
+
+                <div id="c-attest-container2">
+                    <div>
+                        <div>
+                            <label class="question" for="class-c-attest">Kies de gewenste klas bij een C-attest</label>
+                        </div>
+                        <div>
+                            <select id="class-c-attest" name="class-c-attest">
+                                <option value="" selected></option>
+                            </select> 
+                        </div>
+                        <div>
+                            <label class="comment" id="class-c-attest-comment"></label>
+                        </div>
+                    </div>
+                    <div class="proef-info" id="info-c-attest">
+                        <p></p>
+                    </div>
+                </div>
+
+                <div id="language">
+                    <div>
+                        <div>
+                            <div>
+                                <label class="question" for="language">Taalkeuze in het 5e jaar</label>
+                            </div>
+                            <div class="box-radio">
+                                <div>
+                                    <p class="explanation-in-box">In het 5e jaar is er de keuze om Duits of Italiaans te volgen.  We proberen zo veel 
+                                        mogelijk de keuzes te respecteren. Kies de gewenste taal<p>
+                                </div>
+                                <div>
+                                    <input type="radio" id="german" name="language" value="Duits">
+                                    <label for="german">Duits</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="italian" name="language" value="Italiaans">
+                                    <label for="italian">Italiaans</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="comment" id="language-comment"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="image">
+                    <div>
+                        <div>
+                            <div>
+                                <label class="question" for="image">Toestemming afbeelding</label>
+                            </div>
+                            <div class="box-radio">
+                                <div>
+                                    <p class="explanation-in-box" id="explanation-image"></p>
+                                </div>
+                                <div>
+                                    <input type="radio" id="yes_image" name="image" value="wel_beelden">
+                                    <label for="yes_image">Ja, er mogen beelden van de leerling gemaakt en gepubliceerd worden.</label>
+                                </div>
+                                <div>
+                                    <input type="radio" id="no_image" name="image" value="geen_beelden">
+                                    <label for="no_image">Nee, er mogen geen beelden van de leerling gemaakt of gepubliceerd worden.</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="comment" id="image-comment"></label>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div id="statements">
+                    <div >
+                        <div>
+                            <label class="question" for="statements">Akkoordverklaringen</label>
+                        </div>
+                        <div class="box-list">
+                            <ul id="statements-list">
+                                
+                            </ul> 
+                        </div>
+                    </div>
+                </div>
+
+                <div id="signing"> 
+                    <div>
+                        <div>
+                            <p>Vul hieronder jouw gegevens als <b>ondertekenaar</b> aan.</p>
+                        </div>
+                    </div>
+                    <div id="text-submitter">
+                        <div>
+                            <label class="question" for="fname-sign">Voornaam ondertekenaar</label>
+                        </div>
+                        <div>
+                            <input type="text" id="fname-sign" name="fname-sign">
+                        </div>
+                        <div>
+                            <label class="comment" id="fname-sign-comment"></label>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label class="question" for="lname-sign">Familienaam ondertekenaar</label>
+                        </div>
+                        <div>
+                            <input type="text" id="lname-sign" name="lname-sign">
+                        </div>
+                        <div>
+                            <label class="comment" id="lname-sign-comment"></label>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label class="question" for="type-sign">Hoedanigheid ondertekenaar</label>
+                        </div>
+                        <div>
+                            <select id="type-sign" name="type-sign">
+                                <option value="" selected></option>
+                                <option value="moeder">Moeder</option>
+                                <option value="vader">Vader</option>
+                                <option value="voogd">Voogd</option>
+                                <option value="overig">Overig</option>
+                            </select> 
+                        </div>
+                        <div>
+                            <label class="comment" id="type-sign-comment"></label>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <label class="question" for="mail-sign">E-mailadres ondertekenaar</label>
+                        </div>
+                        <div>
+                            <input type="mail" id="mail-sign" name="mail-sign">
+                        </div>
+                        <div>
+                            <label class="comment" id="mail-sign-comment"></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="end-containers" id="end-container2">
+                    <div>
+                        <button id="button-save-container2" type="button">Verzenden</button>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form> 
+
+
+
+
+
+
+
+    <?!= include("main-js");?>
+    <?!= include("enum-js");?>
+    <?!= include("switch-js");?>
+    <?!= include("gas-js");?>
+    
+</body>
+</html>

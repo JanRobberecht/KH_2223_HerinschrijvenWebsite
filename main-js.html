@@ -1,0 +1,1126 @@
+<script>
+
+/******************************************/
+/**************** GLOBALS *****************/
+/******************************************/
+
+
+/*var enrollmentObject = {};
+
+
+
+/***************************************************/
+/**************** CHRONO FUNCTIONS *****************/
+/***************************************************/
+
+function createEnrollmentObject() {
+
+  enrollmentObject = {
+    firstName: "",
+    lastName: "",
+    submitter: "",
+    classNowIndex: "",
+    classNowYear: "",
+    classNowName: "",
+    classNowCode: "",
+    classNowPlace:"",
+    nextYear: "",
+    classNextA: "",
+    classNextB: "",
+    classNextC: "",
+    classInfoA: "",
+    classInfoB: "",
+    classInfoC: "",
+    language: "",
+    image: "",
+    firstNameSubmitter: "",
+    lastNameSubmitter: "",
+    typeSubmitter:"",
+    emailSubmitter: ""
+  }
+
+  setContainer1();
+}
+
+function setContainer1() {
+
+  if (active) {
+    if (results) {
+      document.querySelector("#intro p").innerHTML = intro.after;
+    } else {
+      document.querySelector("#intro p").innerHTML = intro.before;
+    }
+  } else {
+    document.querySelector("#intro p").innerHTML = intro.stop;
+    document.getElementById("container1").style.display = "none";
+    document.getElementById("end-container1").style.display = "none";
+  }
+
+ 
+
+
+
+  // need to map first otherwise function "fillClassesToSelect" can't be shared woth other 1 dimensional arrays
+
+  fillClassesToSelect(classesNow.map(element => { return element[1]; }), "classnow");
+
+}
+
+function getChoicesBefore() {
+
+  checkIfNextYearChecked();
+
+  var selectedData = getSelectedData(getSelectedElement, classesNow, "classnow");
+  console.log(selectedData);
+  document.getElementById("before").style.display = "block";
+
+
+  if (selectedData.classYear === 1) {
+    document.getElementById("before-stay").style.display = "block";
+    document.querySelector("#before-stay > label").innerHTML = "De leerling zal met een A-attest <b>les blijven volgen</b> aan de Kunsthumaniora"
+    document.getElementById("before-leave").style.display = "block";
+   
+  } else if (selectedData.classYear === 6) {
+    document.getElementById("before-stay").style.display = "block";
+    document.querySelector("#before-stay > label").innerHTML = "De leerling zal per attest (diploma en C-attest) een keuze maken om <b>wel of geen les te volgen</b> aan de Kunsthumaniora"
+    document.getElementById("before-leave").style.display = "block";
+    
+  } else if (selectedData.classYear === "") {
+    document.getElementById("before").style.display = "none";
+       
+  } else {
+    document.getElementById("before-stay").style.display = "block";
+    document.querySelector("#before-stay > label").innerHTML = "De leerling zal per attest (A en C-attest) een keuze maken om <b>wel of geen les te volgen</b> aan de Kunsthumaniora"
+    document.getElementById("before-leave").style.display = "block";
+  }
+}
+
+
+function getChoicesAfter() {
+
+  checkIfNextYearChecked();
+
+  var selectedData = getSelectedData(getSelectedElement, classesNow, "classnow");
+  console.log(selectedData);
+  document.getElementById("after").style.display = "block";
+
+
+  if (selectedData.classYear === 1) {
+    document.getElementById("after-a").style.display = "block";
+    document.getElementById("after-b").style.display = "block";
+        document.querySelector("#after-b > label").innerHTML = "De leerling heeft een <b>A-attest met uitsluting</b> en blijft een voorbereidend jaar volgen aan de Kunsthumaniora";
+    document.getElementById("after-c").style.display = "none";
+    document.getElementById("after-leave").style.display = "block";
+   
+  } else if (selectedData.classYear === 5) {
+    document.getElementById("after-a").style.display = "block";
+    document.getElementById("after-b").style.display = "none";
+    document.getElementById("after-c").style.display = "block";
+    document.getElementById("after-leave").style.display = "block";
+    
+  } else if (selectedData.classYear === 6) {
+    document.getElementById("after-a").style.display = "block";
+    document.querySelector("#after-a > label").innerHTML = "De leerling heeft een <b>diploma</b> en blijft een voorbereidend jaar volgen aan de Kunsthumaniora";
+    document.getElementById("after-b").style.display = "none";
+    document.getElementById("after-c").style.display = "block";
+    document.getElementById("after-leave").style.display = "block";
+   
+    
+  } else if (selectedData.classYear === "") {
+    document.getElementById("after").style.display = "none";
+       
+  } else {
+    document.getElementById("after-a").style.display = "block";
+    //document.querySelector("#after-a > label").innerHTML = "De leerling heeft een <b>A-attest</b> en blijft les volgen aan de Kunsthumaniora"
+    document.getElementById("after-b").style.display = "block";
+    document.getElementById("after-c").style.display = "block";
+    document.getElementById("after-leave").style.display = "block";
+    
+  }
+}
+
+function validateContainer1() {
+
+  /* All comment labels invisible */
+
+  document.querySelectorAll(".comment").forEach(function (label) {
+    label.style.display = "none";
+  });
+
+  /* comment under button invisible */
+
+  document.querySelector("#end-container1 p").style.display = "none";
+
+  /* Get all data */
+
+  // https://www.javatpoint.com/how-to-check-a-radio-button-using-javascript
+
+  var selectedElement = getSelectedElement("classnow");
+
+  var firstNameElement = document.getElementById("fname");
+  var firstNameComment = document.getElementById("fname-comment");
+  var lastNameElement = document.getElementById("lname");
+  var lastNameComment = document.getElementById("lname-comment");
+  var submitterElement = document.querySelector('input[name="submitter"]:checked');
+  var submitterComment = document.getElementById("submitter-comment");
+  var classNowElement = selectedElement;
+  var classNowComment = document.getElementById("classnow-comment");
+  var nextYearElement = document.querySelector('input[name="nextyear"]:checked');
+  var newtYearComment = document.getElementById("nextyear-comment");
+
+  /* Check whether all fields are filled in */
+
+  var elementsContainer1 = [
+
+    [firstNameElement, firstNameComment],
+    [lastNameElement, lastNameComment],
+    [submitterElement, submitterComment],
+    [classNowElement, classNowComment],
+    [nextYearElement, newtYearComment],
+
+  ]
+
+  let counter = checkRequiredFields(elementsContainer1);
+
+
+  /* If everything is filled in, make an object of the choices */
+
+  if (counter === 0) {
+
+
+    /* disable all elements in container1 */
+
+    var nodes = document.getElementById("container1").getElementsByTagName('*');
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].disabled = true;
+    }
+
+    /* change color after disabled */
+
+    document.querySelectorAll("#container1 .box-radio label").forEach(function (label) {
+      label.style.color = "rgb(199, 198, 198)";
+    });
+
+    document.querySelectorAll("#container1 .box-radio").forEach(function (border) {
+      border.style.borderColor = "rgb(163, 158, 158)";
+    });
+
+    document.querySelectorAll("#container1 .question").forEach(function (label) {
+      label.style.color = "rgb(199, 198, 198)";
+    });
+   
+    
+
+    /* switch buttons */
+
+    document.getElementById("button-next-container1").style.display = "none";
+
+  
+
+
+    /* start functions */
+
+    fillObjectWithDataContainer1(elementsContainer1);
+    setClassesContainer2()
+
+  } else {
+
+    document.querySelector("#end-container1 p").style.display = "block";
+    document.querySelector("#end-container1 p").innerText = "Vul hierboven eerst alle vereiste vragen in!"
+    document.querySelector("#end-container1").scrollIntoView();
+  }
+
+}
+
+function fillObjectWithDataContainer1(arr) {
+
+  var selectedData = getSelectedData(getSelectedElement, classesNow, "classnow");
+
+  enrollmentObject.firstName = arr[0][0].value;
+  enrollmentObject.lastName = arr[1][0].value;
+  enrollmentObject.submitter = arr[2][0].value;
+  enrollmentObject.classNowIndex = selectedData.classIndex;
+  enrollmentObject.classNowYear = selectedData.classYear;
+  enrollmentObject.classNowName = selectedData.classShort;
+  enrollmentObject.classNowCode = selectedData.classCode;
+  enrollmentObject.classNowPlace = selectedData.classPlace;
+  enrollmentObject.nextYear = arr[4][0].value;
+}
+
+function setClassesContainer2() {
+
+  // set the classes
+
+  var classesA, classesB, classesC;
+
+  /* klassen BSO */
+
+  if (enrollmentObject.classNowCode === "C1") {
+    classesA = getClassesNext(enrollmentObject.classNowYear, enrollmentObject.classNowCode);
+    classesC = classesNext.map((element) => {
+      if (element[0] === enrollmentObject.classNowYear && element[2] === enrollmentObject.classNowCode) {
+        return element[1];
+      }
+    }).filter((element) => {
+
+      if (element != undefined) {
+        return element;
+      }
+    });
+    classesB = classesC.map((element) => { return element; });
+
+  } 
+
+   /* klassen 1e jaar per campus */
+
+  else if (enrollmentObject.classNowYear == 1) {
+
+    classesA = classesNext.map((element) => {
+
+      if (enrollmentObject.classNowYear + 1 === element[0] && enrollmentObject.classNowPlace === element[4]) {
+         return element[1];
+      }
+
+     }).filter((element) => {
+
+      if (element != undefined) {
+        return element;
+      }
+    });
+
+    classesC = getClassesNext(enrollmentObject.classNowYear, enrollmentObject.classNowCode);
+    classesB = classesC.concat(classesA);
+
+  }
+
+   /* klassen 2e jaar per campus */
+
+  else if (enrollmentObject.classNowYear == 2) {
+
+    classesA = getClassesNext(enrollmentObject.classNowYear + 1, enrollmentObject.classNowCode);
+
+    classesC = classesNext.map((element) => {
+
+      if (enrollmentObject.classNowYear === element[0] && enrollmentObject.classNowPlace === element[4]) {
+         return element[1];
+      }
+
+     }).filter((element) => {
+
+      if (element != undefined) {
+        return element;
+      }
+    });
+
+    classesB = classesC.concat(classesA);
+
+  }
+
+  /* klassen 5e jaar */
+  
+  else if (enrollmentObject.classNowYear == 5) {
+
+    var sameClassLike5 = enrollmentObject.classNowName.replace(/5/g, "6");
+    classesA = classesNext.map((element) => {
+
+      if (sameClassLike5 === element[3]) {
+        return element[1]
+      }
+
+
+    /*  if (element[1].includes(sameClassLike5)){
+        return element[1]
+      }*/
+    }).filter((element) => {
+
+      if (element != undefined) {
+        return element;
+      }
+    });
+
+    classesC = getClassesNext(enrollmentObject.classNowYear, enrollmentObject.classNowCode);
+    classesB = classesC.concat(classesA);
+
+  }
+  
+  /* klassen 6e jaar */
+  
+  else if (enrollmentObject.classNowYear == 6) {
+
+    classesA = getClassesNext(enrollmentObject.classNowYear + 1, enrollmentObject.classNowCode);
+
+    var sameClassIn6 = enrollmentObject.classNowName;
+    classesC = classesNext.map((element) => {
+
+      if (sameClassIn6 === element[3]) {
+        return element[1]
+      }
+    }).filter((element) => {
+
+      if (element != undefined) {
+        return element;
+      }
+    });
+
+    classesB = classesC.concat(classesA);
+  }
+
+  /* alle andere klassen */
+  
+  else {
+
+    classesA = getClassesNext(enrollmentObject.classNowYear + 1, enrollmentObject.classNowCode);
+    classesC = getClassesNext(enrollmentObject.classNowYear, enrollmentObject.classNowCode);
+    classesB = classesC.concat(classesA);
+
+  }
+
+  if (!results) {
+
+    classesA.unshift("De leerling zal geen les volgen aan de Kunsthumaniora");
+    classesB.unshift("De leerling zal geen les volgen aan de Kunsthumaniora");
+    classesC.unshift("De leerling zal geen les volgen aan de Kunsthumaniora");
+
+  }
+
+
+  setDataAndVisibilityContainer2(classesA, classesB, classesC)
+}
+
+
+function setDataAndVisibilityContainer2(classesA, classesB, classesC) {
+
+ 
+  document.querySelectorAll(".proef-info").forEach(function (infoBox) {
+    infoBox.style.display = "none";
+  });
+  
+  
+  if (enrollmentObject.nextYear == "blijven" && enrollmentObject.classNowYear == 1) {
+    
+    fillClassesToSelect(classesA, "class-a-attest");
+    document.getElementById("a-attest-container2").style.display = "block";
+
+  } else if (enrollmentObject.nextYear == "blijven") {
+
+      if (enrollmentObject.classNowYear == 6) {
+        document.querySelector("#a-attest-container2 .question").innerHTML = "Kies de gewenste klas bij een diploma";
+      }
+  
+    fillClassesToSelect(classesA, "class-a-attest");
+    fillClassesToSelect(classesC, "class-c-attest");
+    document.getElementById("a-attest-container2").style.display = "block";
+    document.getElementById("c-attest-container2").style.display = "block";
+
+  } else if (enrollmentObject.nextYear == "a-attest") {
+
+    if (enrollmentObject.classNowYear == 6) {
+      document.querySelector("#a-attest-container2 .question").innerHTML = "Kies de gewenste klas bij een diploma";
+    }
+
+    fillClassesToSelect(classesA, "class-a-attest");
+    document.getElementById("a-attest-container2").style.display = "block";
+
+  } else if (enrollmentObject.nextYear == "b-attest") {
+
+       if (enrollmentObject.classNowYear == 1) {
+      document.querySelector("#b-attest-container2 .question").innerHTML = "Kies de gewenste klas bij een a-attest met uitsluiting";
+    }
+
+    fillClassesToSelect(classesB, "class-b-attest");
+    document.getElementById("b-attest-container2").style.display = "block";
+
+  } else if (enrollmentObject.nextYear == "c-attest") {
+
+    fillClassesToSelect(classesC, "class-c-attest");
+    document.getElementById("c-attest-container2").style.display = "block";
+
+  }
+
+  
+
+
+
+  if (enrollmentObject.submitter === "leerling") {
+    document.getElementById("fname-sign").value = enrollmentObject.firstName;
+    document.getElementById("fname-sign").disabled = true;
+    document.querySelector("label[for=fname-sign]").style.color = "rgb(199, 198, 198)";
+    document.getElementById("lname-sign").value = enrollmentObject.lastName;
+    document.getElementById("lname-sign").disabled = true;
+    document.querySelector("label[for=lname-sign]").style.color = "rgb(199, 198, 198)";
+    document.getElementById("type-sign").options[0].text = "Meerderjarige leerling";
+    document.getElementById("type-sign").options[0].value = "student";
+    document.getElementById("type-sign").disabled = true;
+    document.querySelector("label[for=type-sign]").style.color = "rgb(199, 198, 198)";
+
+    if (enrollmentObject.nextYear === "stoppen") {
+      fillStatements(statementsStudentStop, "statements-list");
+      enrollmentObject.classNextA = "Stop";
+      enrollmentObject.classNextB = "Stop";
+      enrollmentObject.classNextC = "Stop";
+    } else {
+      fillStatements(statementsStudentStay, "statements-list");
+      document.getElementById("explanation-image").innerText = imageTaken.student;
+      document.getElementById("image").style.display = "block";
+    }
+
+  } else {
+
+    if (enrollmentObject.nextYear === "stoppen") {
+      fillStatements(statementsParentStop, "statements-list");
+      enrollmentObject.classNextA = "Stop";
+      enrollmentObject.classNextB = "Stop";
+      enrollmentObject.classNextC = "Stop";
+    } else {
+      fillStatements(statementsParentStay, "statements-list");
+      document.getElementById("explanation-image").innerText = imageTaken.parent;
+      document.getElementById("image").style.display = "block";    
+    }
+
+  }
+
+
+  document.getElementById("statements").style.display = "block";
+
+  document.getElementById("signing").style.display = "block";
+  
+  document.getElementById("end-container2").style.display = "block";
+
+  document.getElementById("container2").scrollIntoView();
+
+}
+
+function attestA() {
+
+  var classA = getSelectedData(getSelectedElement, classesNext, "class-a-attest");
+
+  /* adding prop to object */
+  enrollmentObject.classNextA = classA.classShort;
+
+  document.getElementById("info-a-attest").style.display = "none";
+
+  var info = checkCodes(enrollmentObject.classNowCode, classA.classCode);
+
+  if (info != undefined) {
+    document.querySelector("#info-a-attest > p").innerHTML = info[0];
+    document.getElementById("info-a-attest").style.display = "block";
+    enrollmentObject.classInfoA = info[1];
+
+  } else {
+    enrollmentObject.classInfoA = "";
+  }
+
+  if (classA.classYear === 5 && classA.classCode.charAt(0) != "C") {
+    checkLanguage(classA.classCode)
+  }
+
+
+  
+
+}
+
+function attestB() {
+
+  var classB = getSelectedData(getSelectedElement, classesNext, "class-b-attest");
+  enrollmentObject.classNextB = classB.classShort;
+
+  document.getElementById("info-b-attest").style.display = "none";
+
+  var info = checkCodes(enrollmentObject.classNowCode, classB.classCode);
+
+  if (info != undefined) {
+    document.querySelector("#info-b-attest > p").innerHTML = info[0];
+    document.getElementById("info-b-attest").style.display = "block";
+    enrollmentObject.classInfoB = info[1];
+  } else {
+    enrollmentObject.classInfoB = "";
+  }
+  
+
+  if (classB.classYear === 5 && classB.classCode.charAt(0) != "C") {
+    checkLanguage(classB.classCode)
+  } else {
+    checkIfLanguageChecked();
+    document.getElementById("language").style.display = "none";
+
+  }
+}
+
+function attestC() {
+
+  var classC = getSelectedData(getSelectedElement, classesNext, "class-c-attest");
+  enrollmentObject.classNextC = classC.classShort;
+
+  document.getElementById("info-c-attest").style.display = "none";
+
+  var info = checkCodes(enrollmentObject.classNowCode, classC.classCode)
+
+  if (info != undefined) {
+    document.querySelector("#info-c-attest > p").innerHTML = info[0];
+    document.getElementById("info-c-attest").style.display = "block";
+    enrollmentObject.classInfoC = info[1];
+
+  } else {
+    enrollmentObject.classInfoC = "";
+  
+  }
+
+  if (classC.classYear === 5 && classC.classCode.charAt(0) != "C") {
+    checkLanguage(classC.classCode)
+  }
+}
+
+function chooseLanguage() {
+
+  var chosenLanguage = document.querySelector('input[name="language"]:checked').value;
+  enrollmentObject.language = chosenLanguage;
+
+}
+
+function chooseImage() {
+
+
+  var chosenImage = document.querySelector('input[name="image"]:checked').value;
+  enrollmentObject.image = chosenImage;
+
+
+}
+
+function validateContainer2() {
+
+  /* All comment labels invisible */
+
+  document.querySelectorAll(".comment").forEach(function (label) {
+    label.style.display = "none";
+  });
+
+  /* Get all data */
+
+  // https://www.javatpoint.com/how-to-check-a-radio-button-using-javascript
+
+
+  var selectedA = getSelectedElement("class-a-attest");
+  var selectedB = getSelectedElement("class-b-attest");
+  var selectedC = getSelectedElement("class-c-attest");
+  var selectedTypeSubmitter = getSelectedElement("type-sign");
+
+  var classAElement = selectedA;
+  var classAComment = document.getElementById("class-a-attest-comment");
+  var classBElement = selectedB;
+  var classBComment = document.getElementById("class-b-attest-comment");
+  var classCElement = selectedC;
+  var classCComment = document.getElementById("class-c-attest-comment");
+  var languageElement = document.querySelector('input[name="language"]:checked');
+  var languageComment = document.getElementById("language-comment");
+  var imageElement = document.querySelector('input[name="image"]:checked');
+  var imageComment = document.getElementById("image-comment");
+  var firstNameSignElement = document.getElementById("fname-sign");
+  var firstNameSignComment = document.getElementById("fname-sign-comment");
+  var lastNameSignElement = document.getElementById("lname-sign");
+  var lastNameSignComment = document.getElementById("lname-sign-comment");
+  var typeSignElement = selectedTypeSubmitter;
+  var typeSignComment = document.getElementById("type-sign-comment");
+  var mailSignElement = document.getElementById("mail-sign");
+  var mailSignComment = document.getElementById("mail-sign-comment");
+
+  console.log(typeSignElement);
+
+  var elementsContainer2 = [
+
+    [firstNameSignElement, firstNameSignComment],
+    [lastNameSignElement, lastNameSignComment],
+    [typeSignElement, typeSignComment],
+    [mailSignElement, mailSignComment]
+
+  ];
+
+  if (enrollmentObject.nextYear === "blijven" && enrollmentObject.classNowYear != 1) {
+
+    let tmpArr = [
+
+      [classAElement, classAComment],
+      [classCElement, classCComment],
+      [imageElement, imageComment]
+
+    ]
+
+    elementsContainer2.push(...tmpArr);
+
+  } else if (enrollmentObject.nextYear === "blijven" && enrollmentObject.classNowYear === 1) {
+
+    let tmpArr = [
+
+      [classAElement, classAComment],
+      [imageElement, imageComment]
+
+    ]
+
+    elementsContainer2.push(...tmpArr);
+    
+  } else if (enrollmentObject.nextYear === "a-attest") {
+
+    let tmpArr = [
+
+      [classAElement, classAComment],
+      [imageElement, imageComment]
+    ]
+
+    elementsContainer2.push(...tmpArr);
+
+  } else if (enrollmentObject.nextYear === "b-attest") {
+
+    let tmpArr = [
+      [classBElement, classBComment],
+      [imageElement, imageComment]
+    ]
+
+    elementsContainer2.push(...tmpArr);
+
+  } else if (enrollmentObject.nextYear === "c-attest") {
+
+    let tmpArr = [
+
+      [classCElement, classCComment],
+      [imageElement, imageComment]
+    ]
+
+    elementsContainer2.push(...tmpArr)
+
+  }
+
+  var x = document.getElementById("language");
+
+  if (window.getComputedStyle(x).display === "block") {
+  
+    let tmpArr = [ [languageElement, languageComment]]
+    elementsContainer2.push(...tmpArr);
+
+  } 
+
+  /* Check whether all fields are filled in */
+
+
+
+  var counterFields = checkRequiredFields(elementsContainer2);
+  var counterMail;
+
+  if (counterFields === 0) {
+    counterMail = checkEmail(mailSignElement, mailSignComment);
+    
+  } else {
+
+      document.querySelector("#end-container2 p").style.display = "block";
+      document.querySelector("#end-container2 p").innerText = "Vul hierboven eerst alle vereiste vragen in!"
+      document.querySelector("#end-container2").scrollIntoView();
+      return;
+    
+  }
+  
+
+   
+
+  /* If everything is filled in, make an object of the choices */
+
+  if (counterMail === 0) {
+
+    document.getElementById("button-save-container2").style.display = "none";
+
+    /* disable all elements in container2 */
+
+    var nodes = document.getElementById("container2").getElementsByTagName('*');
+    for (var i = 0; i < nodes.length; i++) {
+      nodes[i].disabled = true;
+    }
+
+   
+
+     /* change color after disabled */
+
+    document.querySelectorAll("#container2 .box-radio label").forEach(function (label) {
+      label.style.color = "rgb(199, 198, 198)";
+    });
+
+    document.querySelectorAll("#container2 .box-list li").forEach(function (li) {
+      li.style.color = "rgb(199, 198, 198)";
+    });
+
+    document.querySelectorAll("#container2 .box-radio").forEach(function (border) {
+      border.style.borderColor = "rgb(163, 158, 158)";
+    });
+
+    document.querySelectorAll(".explanation-in-box").forEach(function (p) {
+      p.style.color = "rgb(199, 198, 198)";
+    });
+
+    document.querySelectorAll("#container2 .box-list").forEach(function (border) {
+      border.style.borderColor = "rgb(163, 158, 158)";
+    });
+
+    document.querySelectorAll("#container2 .question").forEach(function (label) {
+      label.style.color = "rgb(199, 198, 198)";
+    });
+
+    document.querySelector("#signing p").style.color = "rgb(199, 198, 198)";
+
+    document.querySelectorAll(".proef-info p").forEach(function (p) {
+      p.style.color = "rgb(163, 158, 158)";
+    });
+
+    document.querySelectorAll(".proef-info").forEach(function (p) {
+      p.style.borderColor = "rgb(232, 231, 227)";
+      p.style.backgroundColor = "rgb(232, 231, 227)";
+    });
+
+    /* info is given */
+    document.querySelector("#end-container2 p").style.color = "#ce0f69";
+    document.querySelector("#end-container2 p").innerHTML = "Even geduld...  De gegevens worden weggeschreven naar de databank."
+
+
+    /* push to object */
+
+    enrollmentObject.firstNameSubmitter = elementsContainer2[0][0].value;
+    enrollmentObject.lastNameSubmitter = elementsContainer2[1][0].value;
+    enrollmentObject.typeSubmitter = elementsContainer2[2][0].value;
+    enrollmentObject.emailSubmitter = elementsContainer2[3][0].value.replace(/\s/g,'');
+
+    prepareForDatabase();
+
+  } else {
+    document.querySelector("#end-container2 p").innerText = "Verbeter hierboven eerst alle vragen!"
+  }
+
+  document.querySelector("#end-container2 p").style.display = "block";
+  document.querySelector("#end-container2").scrollIntoView();
+
+}
+
+
+
+
+
+
+/***************************************************/
+/**************** SHARED FUNCTIONS *****************/
+/***************************************************/
+
+function checkIfNextYearChecked () {
+
+  /* zie checkRequiredelements om undefined radiobuttons op te lossen */
+
+  let radioNextYear = document.querySelector('input[name="nextyear"]:checked')
+
+  if (radioNextYear != undefined) {
+    if(radioNextYear.checked){
+      radioNextYear.checked = false;
+    }
+  }
+}
+
+function checkRequiredFields(arr) {
+
+  let counter = 0;
+
+  arr.forEach(function (element) {
+
+    // if there is no selected radiobutton, the element itself is null and therefore can't give a value
+    // but gives a refference error
+
+    if (element[0] == undefined) {
+      counter++;
+      element[1].style.display = "block"
+      element[1].innerHTML = "Dit is een vereiste vraag."
+  
+
+    } else if (element[0] != undefined && element[0].value == '') {
+      counter++;
+      element[1].style.display = "block"
+      element[1].innerHTML = "Dit is een vereiste vraag."
+    }
+  });
+
+  // vereiste vraag shouldn't appear when classNow isn't selected
+
+  var classNowComment = document.getElementById("classnow-comment").style.display; 
+
+  if (classNowComment == "block"){
+    document.getElementById("nextyear-comment").style.display = "none";
+  }
+
+  return counter;
+}
+
+
+function checkEmail(mail, comment) {
+
+  let counter = 0
+
+  var email = mail.value.replace(/\s/g,'');
+  var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+  if(email.match(mailformat)) {
+    counter = 0;
+  }
+  else {
+    counter++;
+    comment.innerHTML = "Het emailadres bevat fouten."
+    comment.style.display = "block";
+  }
+
+  return counter;
+}
+
+function getClassesNext(year, code) {
+
+
+  var arrClasses = classesNext.map((element) => {
+
+    if (code === "C1") {
+
+      if (element[0] === year + 1 && element[2] === code) {
+        return element[1];
+      }
+      if (element[0] === year && element[2] != code) {
+        return element[1];
+      }
+
+    } else if (element[0] == year) {
+
+      return element[1];
+
+    }
+
+  }).filter((element) => {
+
+    if (element != undefined) {
+      return element;
+    }
+  });
+
+  /* if (!results){
+     arrClasses.unshift("De leerling zal geen les volgen aan de Kunsthumaniora")
+   }*/
+
+  return arrClasses;
+}
+
+
+
+function fillClassesToSelect(arr, id) {
+
+  arr.forEach(function (element) {
+
+    // cls2122[2].forEach(element => {});
+
+    let select = document.getElementById(id);
+    let option = document.createElement("option");
+    option.text = element; // [] gives column
+    select.add(option);
+  });
+
+}
+
+function fillStatements(arr, id) {
+
+  var ul = document.getElementById(id);
+
+  arr.forEach(function (element) {
+
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(element));
+    ul.appendChild(li);
+
+  });
+}
+
+function getSelectedElement(id) {
+
+  var e = document.getElementById(id);
+  var selectedElement;
+
+  if (e != undefined) {
+    selectedElement = e.options[e.selectedIndex];
+  } else {
+    selectedElement = "";
+  }
+
+  return selectedElement;
+
+}
+
+
+function getSelectedData(func, arr, id) {
+
+  var selectedElement = func(id);
+
+  var indexClassesArray = arr.map((el) => el[1]).indexOf(selectedElement.value)
+
+  var data = {};
+
+  if (indexClassesArray != -1) { 
+    
+    var selectedYear = arr[indexClassesArray][0];
+    var selectedCode = arr[indexClassesArray][2];
+    var selectedShort = arr[indexClassesArray][3];
+       var selectedPlace = arr[indexClassesArray][4]
+
+  
+    data = {
+  
+      className: selectedElement.value,
+      classIndex: indexClassesArray,
+      classYear: selectedYear,
+      classCode: selectedCode,
+      classShort: selectedShort,
+      classPlace: selectedPlace
+  
+    }
+  } else {
+
+      data = {
+    
+        className: "",
+        classIndex: "",
+        classYear: "",
+        classCode: "",
+        classShort: "Stop",
+        classPlace: ""
+    }
+  }
+
+
+ 
+  return data;
+
+}
+
+function checkCodes(codeNow, codeNext) {
+
+  let xx = codeNow;
+  let yy = codeNext;
+  let x = codeNow.charAt(0);
+  let y = codeNext.charAt(0);
+
+  if (xx === yy) {
+    //console.log("zelfde code - moet niks gebeuren");
+  } else if (xx === "B1" && y === "B") {
+    //console.log("van ARB naar 3BK - moet niks gebeuren");
+  } else if (yy === "V1") {
+    //console.log("gaat naar 7B");
+    return [proefInfo.toBK7, "toBK7"];
+  } else if (x === "B" && y === "B") {
+    //console.log("verandert vanaf 3 binnen BK - blijft in BK met eventueel proef");
+    return [proefInfo.inBK, "inBK"];
+  } else if (x === "B" && y === "P") {
+    //console.log("van BK naar PK, dus proef");
+    return [proefInfo.toPK, "toPK"];
+  } else if (xx === "P2" && y === "P" && yy != "P1" && yy != "P6") {
+    //console.log("van Muziek (alles) naar Muziek (alles) - moet niks gebeuren");
+  } else if (x === "P" && y === "P") {
+    //console.log("wisselt tussen dans - muziek - woord, dus proef");
+    return [proefInfo.inPK, "inPK"];
+  } else if (x === "P" && y === "B" && yy != "B1") {
+    //console.log("van PK naar BK (muv 2ARB) - dus proef");
+    return [proefInfo.toBK, "toBK"];
+  } else if (x === "C" && y === "P") {
+    //console.log("van BSO naar P - dus proef + TKR");
+    return [proefInfo.toPK, "toPK"];
+  } else if (x === "C" && y === "B" && yy != "B1") {
+    //console.log("verandert vanaf 3 binnen BK - blijft in BK met eventueel proef");
+    return [proefInfo.inBK, "inBK"];
+  } else if (x === "A" && y === "P") {
+    //console.log("van algemeen naar PK - dus proef");
+    return [proefInfo.toPK, "toPK"];
+  } else if (x === "A" && y === "B" && yy != "B1") {
+    //console.log("van algemeen naar BK (muv 2ARB) - dus proef");
+    return [proefInfo.toBK, "toBK"];
+  } else if (xx === "X1" && y === "B" || yy === "P6") {
+    //console.log("van 1ARV naar 2ARB of 2ARW - moet niks gebeuren");
+  } else if (xx === "X1" && y === "P") {
+    //console.log("van 1ARV naar naar PK (muv 2ARW), dus proef");
+    return [proefInfo.toPK, "toPK"];
+  } else {
+    //console.log("moet niks gebeuren");
+  }
+
+}
+
+function checkIfLanguageChecked () {
+
+  /* zie checkRequiredelements om undefined radiobuttons op te lossen */
+
+  let radioLanguage = document.querySelector('input[name="language"]:checked')
+
+  if (radioLanguage != undefined) {
+    if(radioLanguage.checked){
+      radioLanguage.checked = false;
+    }
+  }
+}
+
+
+function checkLanguage(code) {
+
+  
+  checkIfLanguageChecked()
+  
+  let x = code.charAt(0);
+ 
+
+  if (code != "P1" && x === "P") {
+
+    document.getElementById("language").style.display = "block";
+    //console.log("Keuze tussen taal")
+   
+    
+  } else {
+    document.getElementById("language").style.display = "none";
+    //console.log("talen niet te kiezen")
+  }
+ 
+}
+
+
+
+/**************************************************/
+/**************** EVENT LISTENERS *****************/
+/**************************************************/
+
+function changeEventHandler(e) {
+  if (e.target.matches("#classnow")) { 
+
+    if(results){
+      getChoicesAfter();
+    } else {
+      getChoicesBefore();
+    } 
+    
+    document.querySelector("#end-container1").scrollIntoView();
+  }
+  if (e.target.matches("#class-a-attest")) { attestA(); }
+  if (e.target.matches("#class-b-attest")) { attestB(); }
+  if (e.target.matches("#class-c-attest")) { attestC(); }
+
+}
+
+
+function clickEventHandler(e) {
+
+  if (e.target.matches("#button-next-container1")) { validateContainer1(); }
+  if (e.target.matches("#button-save-container2")) { validateContainer2(); }
+  if (e.target.matches("input[name='language']")) { chooseLanguage(); }
+  if (e.target.matches("input[name='image']")) { chooseImage(); }
+
+}
+
+window.addEventListener('DOMContentLoaded', createEnrollmentObject);
+document.getElementsByTagName("body")[0].addEventListener("change", changeEventHandler);
+document.getElementsByTagName("body")[0].addEventListener("click", clickEventHandler);
+
+// window.scrollTo(0, document.body.scrollHeight)
+
+
+
+
+
+
+</script>

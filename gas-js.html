@@ -1,0 +1,30 @@
+<script>
+
+
+function prepareForDatabase() {
+
+  google.script.run
+    .withSuccessHandler(function(result){
+
+      if (result){
+        document.querySelector("#end-container2 p").style.color = "green",
+        document.querySelector("#end-container2 p").innerText = validation.success;
+      } else {
+        document.querySelector("#end-container2 p").style.color = "red",
+        document.querySelector("#end-container2 p").innerText = validation.failure;
+      }
+      document.querySelector("#end-container2").scrollIntoView();
+    })
+    .withFailureHandler(function(){
+
+      document.querySelector("#end-container2 p").style.color = "red",
+      document.querySelector("#end-container2 p").innerText = validation.failure;
+      document.querySelector("#end-container2").scrollIntoView();
+
+    }).writeToDatabase(enrollmentObject);
+
+}
+
+
+
+</script>
