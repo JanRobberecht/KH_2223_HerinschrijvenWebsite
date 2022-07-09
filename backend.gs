@@ -1,4 +1,4 @@
-const ss = SpreadsheetApp.openById("1r_FiM9wBb1EQvpfEe-CqwRghabN4QxoDhoQA63LBTSw")
+const ss = SpreadsheetApp.openById("GET ID HERE")
 const ws = ss.getSheetByName("dBase");
 
 
